@@ -17,7 +17,7 @@ namespace TicTacToe
             //game board intilized with empty spaces and
             //zeroth index ignored
             char[] board = new char[10];
-           
+
             for (int i = 1; i < board.Length; i++)
             {
                 board[i] = ' ';
@@ -30,12 +30,12 @@ namespace TicTacToe
         {
             Random random = new Random();
             int rand = random.Next(2);
-            if(rand == 0)
+            if (rand == 0)
             {
                 Console.WriteLine("Computer plays first");
                 Console.WriteLine("computer inputs 'x' ");
             }
-            if(rand == 1)
+            if (rand == 1)
             {
                 Console.WriteLine("Player plays first");
                 Console.WriteLine("player inputs 'o' ");
@@ -43,6 +43,7 @@ namespace TicTacToe
             return rand;
         }
 
+        //displaying game board
         public void ShowBoard(char[] board)
         {
             Console.WriteLine("   |   |   ");
@@ -55,16 +56,53 @@ namespace TicTacToe
             Console.WriteLine($" {board[7]} | {board[8]} | {board[9]}");
             Console.WriteLine("   |   |   ");
         }
+        //user making his move
+        public char[] UserMove(char[] board)
+        {
+            Console.WriteLine("select the location on Board :  ");
+            int location = Convert.ToInt32(Console.ReadLine());
+            //validating user location
+            while (location > 9 || location < 1)
+            {
+                Console.WriteLine("invalid location, select the location on Board :  ");
+                location = Convert.ToInt32(Console.ReadLine());
+            }
+            location = checkBoard(location, board);
+            if (location == 0)
+            {
+                Console.WriteLine("location already selected");
+                Console.WriteLine("select another location on Board :  ");
+                location = Convert.ToInt32(Console.ReadLine());
+            }
+            else
+            {
+                board[location] = 'x';
+            }
+            return board;
+        }
+
+        //checking if board is empty
+        public int checkBoard(int location, char[] board)
+        {
+            if(board[location] != ' ')
+            {
+                return 0;
+            }
+            else
+            {
+                return location;
+            }
+        }
 
         public void GameInput()
         {
-           //randomly selecting who plays first
-           // and assign character x and o
-           Toss();
+            //randomly selecting who plays first
+            // and assign character x and o
+            Toss();
 
         }
-        
-            
+
+
 
 
 
