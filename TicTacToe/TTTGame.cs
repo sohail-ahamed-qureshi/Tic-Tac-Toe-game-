@@ -67,22 +67,30 @@ namespace TicTacToe
                 Console.WriteLine("invalid location, select the location on Board :  ");
                 location = Convert.ToInt32(Console.ReadLine());
             }
-            location = checkBoard(location, board);
-            if (location == 0)
+            //loop to check for empty space
+            bool one = false;
+            while (true)
             {
-                Console.WriteLine("location already selected");
-                Console.WriteLine("select another location on Board :  ");
-                location = Convert.ToInt32(Console.ReadLine());
-            }
-            else
-            {
-                board[location] = 'x';
+                //checking for free space
+                location = CheckBoard(location, board);
+                if (location == 0)
+                {
+                    Console.WriteLine("location already selected");
+                    Console.WriteLine("select another location on Board :  ");
+                    location = Convert.ToInt32(Console.ReadLine());
+                    one = true;
+                }
+                else
+                {
+                    board[location] = 'x';
+                    break;
+                }
             }
             return board;
         }
 
         //checking if board is empty
-        public int checkBoard(int location, char[] board)
+        public int CheckBoard(int location, char[] board)
         {
             if(board[location] != ' ')
             {
@@ -101,10 +109,5 @@ namespace TicTacToe
             Toss();
 
         }
-
-
-
-
-
     }
 }
