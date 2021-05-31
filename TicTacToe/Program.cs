@@ -9,8 +9,9 @@ namespace TicTacToe
             //Console.WriteLine("Welcome to TicTacToe game");
             TTTGame game = new TTTGame();
             game.Welcome();
-            Console.WriteLine();
+            Console.WriteLine("");
             game.GameBoard();
+            game.GameInput();
         }
     }
 }

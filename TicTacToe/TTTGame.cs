@@ -22,17 +22,32 @@ namespace TicTacToe
             {
                 board[i] = ' ';
             }
-
-            ////displaying game board for trail
-            //foreach (char i in board)
-            //{
-            //    Console.WriteLine(i);
-            //}
         }
 
-        public void Display()
+        //tossing for players
+        public int Toss()
         {
-           
+            Random random = new Random();
+            int rand = random.Next(2);
+            if(rand == 0)
+            {
+                Console.WriteLine("Computer plays first");
+                Console.WriteLine("computer inputs 'x' ");
+            }
+            if(rand == 1)
+            {
+                Console.WriteLine("Player plays first");
+                Console.WriteLine("player inputs 'o' ");
+            }
+            return rand;
+        }
+
+        public void GameInput()
+        {
+           //randomly selecting who plays first
+           // and assign character x and o
+           Toss();
+
         }
         
             
