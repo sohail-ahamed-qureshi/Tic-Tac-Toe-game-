@@ -8,6 +8,8 @@ namespace TicTacToe
     {
         const int HEADS = 1;
         const int TAILS = 0;
+        bool checkWin=false;
+        int numOfTurns = 0;
         public enum Player { USER, COMPUTER};
         //welcome message
         public void Welcome()
@@ -61,9 +63,52 @@ namespace TicTacToe
             Console.WriteLine($" {board[7]} | {board[8]} | {board[9]}");
             Console.WriteLine("   |   |   ");
         }
-        //user making his move
-        public char[] UserMove(char[] board, Player player)
+
+        public char[] Turn(char[] board, Player player)
         {
+            int turn = 1;
+            char ch;
+            while (true )
+            {
+                //check fot wins
+                if (checkWin == true)
+                {
+                    Console.WriteLine($"{player} Wins!!");
+                    break;
+                }
+                //player 1's turn
+                if (turn == 1)
+                {
+                    Console.WriteLine($"{player}'s turn");
+                    ch = 'X';
+                   board = UserMove(board, player ,ch);
+                    ShowBoard(board);
+                    turn = 0;
+                    numOfTurns++; // to count for tie
+                }
+                //check for win for player 2
+                if (checkWin == true)
+                {
+                    Console.WriteLine($"{player + 1} Wins!!");
+                    break;
+                }
+                //player 2's turn
+                if (turn == 0)
+                {
+                    Console.WriteLine($"{player + 1}'s turn");
+                    ch = 'O';
+                    board = UserMove(board, player,ch);
+                    ShowBoard(board);
+                    turn = 1;
+                    numOfTurns++;
+                }
+            }
+            return board;
+        }
+        //user making his move
+        public char[] UserMove(char[] board, Player player, char ch)
+        {
+           
             Console.WriteLine("select the location on Board :  ");
             int location = Convert.ToInt32(Console.ReadLine());
             //validating user location
@@ -87,16 +132,51 @@ namespace TicTacToe
                 }
                 if (player == Player.USER)
                 {
-                    board[location] = 'X';
+                    board[location] = ch;
+                    checkWin = CheckWin(board, board[location]);
                     break;
                 }
-                if(player == Player.COMPUTER)
+                
+                if (player == Player.COMPUTER)
                 {
-                    board[location] = 'O';
+                    board[location] = ch;
+                    checkWin = CheckWin(board, board[location]);
+                    break;
+                }
+                if (numOfTurns == 9 && checkWin == false)
+                {
+                    Console.WriteLine("its a tie");
                     break;
                 }
             }
             return board;
+        }
+
+        public bool getCheckwin()
+        {
+            return checkWin;
+        }
+      
+
+        public bool CheckWin(char [] b, char ch)
+        {
+            if (b[1] == ch && b[2] == ch && b[3] == ch)//top
+                return true;
+            if (b[4] == ch && b[5] == ch && b[6] == ch)//middle
+                return true;
+            if (b[7] == ch && b[8] == ch && b[9] == ch)//bottom
+                return true;
+            if (b[1] == ch && b[4] == ch && b[7] == ch)//left
+                return true;
+            if (b[2] == ch && b[5] == ch && b[8] == ch)//middle
+                return true;
+            if (b[3] == ch && b[6] == ch && b[9] == ch)//right
+                return true;
+            if (b[1] == ch && b[5] == ch && b[9] == ch)//diagonal
+                return true;
+            if (b[3] == ch && b[5] == ch && b[7] == ch)//diagonal
+                return true;
+            return false;
         }
 
         //checking if board is empty
@@ -125,8 +205,8 @@ namespace TicTacToe
             }
             else
                 return player = Player.USER;
-            
-            
+
+  
         }
     }
 }

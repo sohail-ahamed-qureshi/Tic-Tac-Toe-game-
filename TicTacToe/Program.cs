@@ -4,7 +4,7 @@ namespace TicTacToe
 {
     class Program
     {/// <summary>
-    /// UC6 - Check who plays first.
+    /// UC7 - Check who for winner.
     /// </summary>
     /// <param name="args"></param>
         static void Main(string[] args)
@@ -17,12 +17,18 @@ namespace TicTacToe
             TTTGame.Player player = game.GameInput();
             game.ShowBoard(board);
             //loop till all empty spaces are filled
-            for (int i = 1; i< board.Length; i++)
+            for (int i = 1; i < board.Length; i++)
             {
-                board = game.UserMove(board, player);
+                if(game.getCheckwin() == true)
+                {
+                    break;
+                }
+                board = game.Turn(board, player);
                 game.ShowBoard(board);
+                
             }
            
+
 
         }
     }
