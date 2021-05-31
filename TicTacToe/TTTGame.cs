@@ -12,7 +12,7 @@ namespace TicTacToe
             Console.WriteLine("~~~~~~TIC TAC TOE~~~~~~");
         }
 
-        public void GameBoard()
+        public char[] GameBoard()
         {
             //game board intilized with empty spaces and
             //zeroth index ignored
@@ -22,6 +22,7 @@ namespace TicTacToe
             {
                 board[i] = ' ';
             }
+            return board;
         }
 
         //tossing for players
@@ -40,6 +41,19 @@ namespace TicTacToe
                 Console.WriteLine("player inputs 'o' ");
             }
             return rand;
+        }
+
+        public void ShowBoard(char[] board)
+        {
+            Console.WriteLine("   |   |   ");
+            Console.WriteLine($" {board[1]} | {board[2]} | {board[3]}");
+            Console.WriteLine("___|___|___");
+            Console.WriteLine("   |   |   ");
+            Console.WriteLine($" {board[4]} | {board[5]} | {board[6]}");
+            Console.WriteLine("___|___|___");
+            Console.WriteLine("   |   |   ");
+            Console.WriteLine($" {board[7]} | {board[8]} | {board[9]}");
+            Console.WriteLine("   |   |   ");
         }
 
         public void GameInput()
