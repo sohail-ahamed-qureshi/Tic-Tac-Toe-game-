@@ -4,7 +4,7 @@ namespace TicTacToe
 {
     class Program
     {/// <summary>
-    /// UC5 - checking for empty spaces and checking for available spaces.
+    /// UC6 - Check who plays first.
     /// </summary>
     /// <param name="args"></param>
         static void Main(string[] args)
@@ -14,12 +14,12 @@ namespace TicTacToe
             game.Welcome();
             Console.WriteLine("");
            char[] board=  game.GameBoard();
+            TTTGame.Player player = game.GameInput();
+            game.ShowBoard(board);
             //loop till all empty spaces are filled
             for (int i = 1; i< board.Length; i++)
             {
-                game.GameInput();
-                game.ShowBoard(board);
-                board = game.UserMove(board);
+                board = game.UserMove(board, player);
                 game.ShowBoard(board);
             }
            

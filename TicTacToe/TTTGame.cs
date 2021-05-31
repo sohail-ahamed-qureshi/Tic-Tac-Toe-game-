@@ -6,6 +6,9 @@ namespace TicTacToe
 {
     class TTTGame
     {
+        const int HEADS = 1;
+        const int TAILS = 0;
+        public enum Player { USER, COMPUTER};
         //welcome message
         public void Welcome()
         {
@@ -26,21 +29,23 @@ namespace TicTacToe
         }
 
         //tossing for players
-        public int Toss()
+        private static int Toss()
         {
             Random random = new Random();
             int rand = random.Next(2);
-            if (rand == 0)
+            if (rand == HEADS)
             {
                 Console.WriteLine("Computer plays first");
-                Console.WriteLine("computer inputs 'x' ");
+                Console.WriteLine("computer inputs 'X' ");
+                return HEADS;
             }
-            if (rand == 1)
+            if (rand == TAILS)
             {
                 Console.WriteLine("Player plays first");
-                Console.WriteLine("player inputs 'o' ");
+                Console.WriteLine("player inputs 'O' ");
+                return TAILS;
             }
-            return rand;
+            return 0;
         }
 
         //displaying game board
@@ -57,7 +62,7 @@ namespace TicTacToe
             Console.WriteLine("   |   |   ");
         }
         //user making his move
-        public char[] UserMove(char[] board)
+        public char[] UserMove(char[] board, Player player)
         {
             Console.WriteLine("select the location on Board :  ");
             int location = Convert.ToInt32(Console.ReadLine());
@@ -80,9 +85,14 @@ namespace TicTacToe
                     location = Convert.ToInt32(Console.ReadLine());
                     one = true;
                 }
-                else
+                if (player == Player.USER)
                 {
-                    board[location] = 'x';
+                    board[location] = 'X';
+                    break;
+                }
+                if(player == Player.COMPUTER)
+                {
+                    board[location] = 'O';
                     break;
                 }
             }
@@ -102,12 +112,21 @@ namespace TicTacToe
             }
         }
 
-        public void GameInput()
+        public Player GameInput()
         {
             //randomly selecting who plays first
             // and assign character x and o
-            Toss();
-
+           
+           int playerSel = Toss();
+            Player player;
+            if(playerSel == HEADS)
+            {
+                return player = Player.COMPUTER;
+            }
+            else
+                return player = Player.USER;
+            
+            
         }
     }
 }
